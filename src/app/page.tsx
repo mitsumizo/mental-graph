@@ -1,14 +1,7 @@
 'use client';
 
-import { Metadata } from 'next';
 import { MentalGraph } from '@/components/MentalGraph';
 import { yearlyMentalData } from '@/data/mentalData';
-
-// メタデータの設定
-export const metadata: Metadata = {
-  title: 'メンタルトラッカー',
-  description: '年間のメンタルレベルを可視化',
-};
 
 export default function Home() {
   return (
