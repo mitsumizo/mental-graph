@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'メンタルトラッカー',
-  description: '年間のメンタルレベルを可視化するアプリケーション',
+  description: '年間のメンタルレベルを可視化する',
 };
 
 export default function RootLayout({
