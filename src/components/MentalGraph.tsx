@@ -17,9 +17,19 @@ interface MentalGraphProps {
   data: MentalData[];
 }
 
+// Tooltipのprops用の型定義を追加
+interface CustomTooltipProps {
+  active?: boolean;
+  payload?: {
+    value: number;
+    payload: MentalData;
+  }[];
+  label?: string;
+}
+
 export const MentalGraph = ({ data }: MentalGraphProps) => {
-  // カスタムツールチップコンポーネントを更新
-  const CustomTooltip = ({ active, payload, label }: any) => {
+  // CustomTooltipコンポーネントを更新
+  const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
     if (active && payload && payload.length) {
       const level = payload[0].value;
       const emoji = level >= 7 ? '😊' : level >= 4 ? '😐' : '😢';
