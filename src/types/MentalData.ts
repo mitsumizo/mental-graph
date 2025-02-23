@@ -3,4 +3,5 @@ export interface MentalData {
   level: number;
   title: string;
   detail: string;
+  id: string;
 } 

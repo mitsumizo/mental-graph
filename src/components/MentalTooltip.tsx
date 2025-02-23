@@ -7,12 +7,25 @@
  * - アニメーション付きのプログレスバーでメンタルレベルを視覚化
  * - タイトルと詳細テキストの表示
  */
+"use client";
 
 import { CustomTooltipProps } from "@/types/CustomTooltipProps";
-import { MentalLevelIndicator } from "./mental/MentalLevelIndicator";
+import { useEffect, useState } from "react";
 import { DetailSection } from "./mental/DetailSection";
+import { MentalLevelIndicator } from "./mental/MentalLevelIndicator";
 
-export const MentalTooltip = ({ active, payload, label }: CustomTooltipProps) => {
+export const MentalTooltip = ({ active, payload, label, onClose }: CustomTooltipProps & { onClose?: () => void }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // SSRの場合は何も表示しない
+  if (!isMounted) {
+    return null;
+  }
+
   // ツールチップのアクティブ状態とデータの存在確認
   if (!active || !payload || !payload.length) return null;
 
@@ -21,26 +34,34 @@ export const MentalTooltip = ({ active, payload, label }: CustomTooltipProps) =>
   const emoji = level >= 7 ? '😊' : level >= 4 ? '😐' : '😢';
 
   return (
-    <div className="transform transition-all duration-200 ease-in-out">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      onClick={onClose}>
       <div className="bg-white/95 backdrop-blur-sm p-6 rounded-xl shadow-2xl border border-indigo-100 
-                    min-w-[300px] animate-fade-in">
-        {/* ヘッダー部分: 月表示と絵文字 */}
+                    min-w-[300px] animate-fade-in"
+        onClick={e => e.stopPropagation()}>
+        <button
+          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+          onClick={onClose}
+        >
+          ✕
+        </button>
         <div className="flex items-center justify-between mb-3">
           <span className="text-xl font-bold text-indigo-900">{label}</span>
           <span className="text-2xl">{emoji}</span>
         </div>
 
-        {/* タイトル部分 */}
         <div className="mb-4">
           <h3 className="text-lg font-semibold text-indigo-800">
-            {payload[0].payload.title}
+            {payload[0].payload.month}
           </h3>
         </div>
 
-        {/* メンタルレベルと詳細情報 */}
         <div className="space-y-2">
           <MentalLevelIndicator level={level} />
-          <DetailSection detail={payload[0].payload.detail} />
+          <DetailSection 
+            detail={payload[0].payload.detail || ''}
+            id={payload[0].payload.month}
+          />
         </div>
       </div>
     </div>

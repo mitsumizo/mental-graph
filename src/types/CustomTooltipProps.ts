@@ -1,10 +1,14 @@
-import { MentalData } from './MentalData';
 
 export interface CustomTooltipProps {
   active?: boolean;
-  payload?: {
+  payload?: Array<{
     value: number;
-    payload: MentalData;
-  }[];
+    payload: {
+      level: number;
+      month: string;
+      detail?: string;
+    };
+  }>;
   label?: string;
+  onClose?: () => void;
 } 

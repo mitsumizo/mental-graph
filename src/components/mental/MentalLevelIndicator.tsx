@@ -6,6 +6,7 @@
  * - 0-10のレベル値を数値で表示
  * - アニメーション付きのインタラクティブな表示
  */
+"use client";
 
 interface MentalLevelIndicatorProps {
   /** メンタルレベル (0-10の値) */
