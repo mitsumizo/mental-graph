@@ -7,7 +7,7 @@ import { yearlyMentalData } from '@/data/mentalData';
 // メタデータの設定
 export const metadata: Metadata = {
   title: 'メンタルトラッカー',
-  description: '年間のメンタルレベルを可視化する',
+  description: '年間のメンタルレベルを可視化',
 };
 
 export default function Home() {
