@@ -6,6 +6,7 @@
  * - メンタルレベルは0-10の範囲で表示
  * - ホバー時にツールチップで詳細情報を表示
  * - SSR/CSRの互換性に対応
+ * - 上司と自分のコメント機能
  */
 "use client";
 
@@ -22,9 +23,11 @@ import {
 import { MentalTooltip } from './MentalTooltip';
 
 interface SelectedPoint {
+  id: string;
   level: number;
   month: string;
   detail?: string;
+  title?: string;
 }
 
 interface ClickEventData {

@@ -4,6 +4,14 @@ import path from 'path';
 
 const COMMENTS_FILE = path.join(process.cwd(), 'data', 'comments.json');
 
+// コメントデータの型定義
+interface CommentData {
+  id: string;
+  text: string;
+  createdAt: string;
+  authorName: string;
+}
+
 // コメントファイルの初期化を確認
 async function ensureCommentsFile() {
   try {
@@ -36,6 +44,11 @@ export async function POST(request: Request) {
 
   if (!id || !comment) {
     return NextResponse.json({ error: 'ID and comment are required' }, { status: 400 });
+  }
+
+  // 名前の検証
+  if (!comment.authorName || typeof comment.authorName !== 'string') {
+    return NextResponse.json({ error: '名前は必須です' }, { status: 400 });
   }
 
   await ensureCommentsFile();

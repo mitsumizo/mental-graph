@@ -1,4 +1,3 @@
-
 export interface CustomTooltipProps {
   active?: boolean;
   payload?: Array<{
@@ -7,6 +6,8 @@ export interface CustomTooltipProps {
       level: number;
       month: string;
       detail?: string;
+      id?: string;
+      title?: string;
     };
   }>;
   label?: string;
