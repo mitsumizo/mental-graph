@@ -4,14 +4,6 @@ import path from 'path';
 
 const COMMENTS_FILE = path.join(process.cwd(), 'data', 'comments.json');
 
-// コメントデータの型定義
-interface CommentData {
-  id: string;
-  text: string;
-  createdAt: string;
-  authorName: string;
-}
-
 // コメントファイルの初期化を確認
 async function ensureCommentsFile() {
   try {
